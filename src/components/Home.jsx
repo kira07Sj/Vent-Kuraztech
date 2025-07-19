@@ -6,11 +6,14 @@ import { useState } from "react"
 const Home = () => {
 
     const [isVisible, SetIsVisible] = useState(false)
+    const [refreshKey, setRefreshKey] = useState(0);
 
-    const handlePostVent = () => {
-        window.reload()
-        SetIsVisible(false)
-    }
+    const handleVentPosted = () => {
+        setRefreshKey(prev => prev + 1); // change the key to force re-render
+        SetIsVisible(false); // close the form after posting
+    };
+
+    
 
     return (
         <section className="w-full min-h-screen bg-gradient-to-br from-purple-200 via-indigo-200 to-purple-400 flex items-center flex-col">
@@ -24,9 +27,10 @@ const Home = () => {
             <main className="w-[100%] md:w-[50%] p-6 mt-3">
                 <VentForm
                     classname={`${isVisible ? 'flex' : 'hidden'}`}
-                    onClose={() => SetIsVisible(false)}
+                    onClose={()=> SetIsVisible(false)}
+                    onPost={handleVentPosted}
                 />
-                <VentList />
+                <VentList key={refreshKey}/>
             </main>
         </section>
     )
