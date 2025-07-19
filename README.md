@@ -57,21 +57,18 @@ Connect your GitHub repository
 Deploy!
 
 Vercel will automatically: Detect the Vite project
-    ```bash
+    and run 
     npm run build
 
 Deploy the optimized production build
 
 ## Project Structure
 
-src/
-├── components/
-│   ├── Auth/        # Login/Register forms
-│   ├── Vent/        # Vent components
-│   └── Navbar.jsx   # Navigation
-├── context/         # Auth context
-├── App.jsx          # Main app
-└── main.jsx         # Entry point
+| Directory       | Files                | Description               |
+|-----------------|----------------------|---------------------------|
+| src/components/ | Auth/, Vent/, Navbar | All UI components         |
+| src/context/    | AuthContext.js       | Authentication logic      |
+| src/            | App.jsx, main.jsx    | Application entry points  |
 
 ## Configuration
 Edit vite.config.js for:
