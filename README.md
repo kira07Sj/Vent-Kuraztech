@@ -1,6 +1,6 @@
 # Vent App - Anonymous Sharing Platform
 
-![Vent App Screenshot](./public/images/Hero.png.png) 
+![Vent App Screenshot](./public/images/Hero.png) 
 
 A secure, anonymous venting platform built with React, Tailwind CSS, and localStorage for simulated backend functionality.
 
