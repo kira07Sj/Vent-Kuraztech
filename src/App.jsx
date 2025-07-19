@@ -1,8 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
-import Navbar from "./components/Navbar";
-import VentFeed from "./components/Vent/VentList";
 import Hero from "./components/Hero";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
