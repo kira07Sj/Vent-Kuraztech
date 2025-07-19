@@ -1,38 +1,40 @@
-// src/components/Vent/VentForm.jsx
-import { useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+// components/Vent/VentForm.jsx
+import { useState, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function VentForm() {
-  const [text, setText] = useState("");
+  const [ventText, setVentText] = useState('');
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!text.trim()) return;
+    if (!ventText.trim()) return;
 
     const newVent = {
       id: Date.now(),
-      text,
-      author: user?.email || "Anonymous",
-      votes: 0,
+      text: ventText,
+      author: user?.email || 'Anonymous',
+      timestamp: new Date().toISOString(),
+      votes: 0
     };
 
-    const vents = JSON.parse(localStorage.getItem("vents")) || [];
-    localStorage.setItem("vents", JSON.stringify([...vents, newVent]));
-    setText("");
+    // Save to localStorage
+    const vents = JSON.parse(localStorage.getItem('vents')) || [];
+    localStorage.setItem('vents', JSON.stringify([...vents, newVent]));
+    setVentText('');
   };
 
   return (
     <form onSubmit={handleSubmit} className="mb-6">
       <textarea
+        value={ventText}
+        onChange={(e) => setVentText(e.target.value)}
         placeholder="What's on your mind?"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
         className="w-full p-3 border rounded-lg"
         rows={3}
       />
-      <button
-        type="submit"
+      <button 
+        type="submit" 
         className="mt-2 bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600"
       >
         Post Vent

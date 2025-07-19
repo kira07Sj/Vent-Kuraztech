@@ -1,8 +1,14 @@
-import React from 'react'
+import Navbar from "./Navbar"
 
-function Home() {
+const Home = () => {
   return (
-    <div>Home</div>
+    
+    <section className="w-full min-h-screen bg-gradient-to-br from-purple-200 via-indigo-200 to-purple-400">
+        <Navbar/>
+        <main>
+            
+        </main>
+    </section>
   )
 }
 

@@ -3,8 +3,10 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Navbar from "./components/Navbar";
 import VentFeed from "./components/Vent/VentList";
+import Hero from "./components/Hero";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import Home from "./components/Home";
 
 function App() {
   const context = useContext(AuthContext);
@@ -18,11 +20,12 @@ function App() {
 
   return (
     <div>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<VentFeed />} />
-        <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
-        <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
+        <Route path="/" element={<Hero />} />
+        <Route path="/login" element={user ? <Navigate to="/home" /> : <Login />} />
+        <Route path="/register" element={user ? <Navigate to="/home" /> : <Register />} />
+        <Route path="/home" element={<Home/>} />
+        
       </Routes>
     </div>
   );
