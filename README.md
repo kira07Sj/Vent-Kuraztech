@@ -39,8 +39,10 @@ A secure, anonymous venting platform built with React, Tailwind CSS, and localSt
    ```bash
    git clone https://github.com/kira07Sj/Vent-Kuraztech.git
 2. Install dependencies:
+    ```bash
     npm install
 3. Start development server:
+    ```bash
     npm run dev
 
 ## Deployment
@@ -54,11 +56,9 @@ Connect your GitHub repository
 
 Deploy!
 
-Vercel will automatically:
-
-Detect the Vite project
-
-Run npm run build
+Vercel will automatically: Detect the Vite project
+    ```bash
+    npm run build
 
 Deploy the optimized production build
 
