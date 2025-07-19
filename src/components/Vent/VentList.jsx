@@ -1,10 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { Icon } from "@iconify/react";
 import { AuthContext } from "../../context/AuthContext";
+import CommentSection from "../CommentSection";
 
 export default function VentList() {
   const [vents, setVents] = useState([]);
   const { user } = useContext(AuthContext);
+  const [expandedVent, setExpandedVent] = useState(null);
 
   // Initialize with sample data if empty
   useEffect(() => {
@@ -79,6 +81,20 @@ export default function VentList() {
     return vent.votes.find(v => v.userId === user.id)?.type;
   };
 
+  const handleAddComment = (ventId, newComment) => {
+  const updatedVents = vents.map(vent => {
+    if (vent.id === ventId) {
+      return {
+        ...vent,
+        comments: [...(vent.comments || []), newComment]
+      };
+    }
+    return vent;
+  });
+  setVents(updatedVents);
+  localStorage.setItem('vents', JSON.stringify(updatedVents));
+};
+
   return (
     <div className="space-y-4">
       {vents.map(vent => {
@@ -93,9 +109,20 @@ export default function VentList() {
             
             {/* Author and Voting */}
             <div className="text-sm text-gray-500 mt-3 w-full flex justify-between items-center">
-              <span>
+              <div className="flex items-start flex-col">
+                <span>
                 {new Date(vent.timestamp).toLocaleString()}
               </span>
+
+                <button 
+                      onClick={() => setExpandedVent(expandedVent === vent.id ? null : vent.id)}
+                      className="text-sm text-blue-500 mt-2"
+                    >
+                      {expandedVent === vent.id ? 'Hide comments' : `Show comments (${vent.comments?.length || 0})`}
+                    </button>
+              </div>
+
+              
               
               <div className="flex gap-3 items-center">
                 {/* Like Button */}
@@ -133,6 +160,13 @@ export default function VentList() {
                 </button>
               </div>
             </div>
+            {/* Comment section */}
+              {expandedVent === vent.id && (
+                <CommentSection 
+                  vent={vent} 
+                  onCommentAdded={handleAddComment}
+                />
+              )}
           </div>
         );
       })}
